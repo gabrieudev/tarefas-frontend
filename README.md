@@ -23,7 +23,7 @@ O projeto foi desenvolvido durante um processo seletivo da empresa Fatto, onde �
 - Visualização ordenada, edição e remoção de tarefas.
 - Ordenação de tarefas.
 - Exposição detalhada de erros e regras de negócio.
-- Integração com banco de dados PostgreSQL.
+- Integração com backend utilizando Axios.
 
 ## Tecnologias
 
