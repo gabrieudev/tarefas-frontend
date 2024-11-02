@@ -1,14 +1,5 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,17 +11,26 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
-  Edit,
-  Trash2,
-  ChevronUp,
-  ChevronDown,
-  Plus,
-  GripVertical,
-} from "lucide-react";
-import axios from "axios";
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
+import {
+  ChevronDown,
+  ChevronUp,
+  Edit,
+  GripVertical,
+  Plus,
+  Trash2,
+} from "lucide-react";
+import { useEffect, useState } from "react";
 
 const TaskManager = () => {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -55,7 +55,7 @@ const TaskManager = () => {
   }, []);
 
   const getTaskBackground = (custo) => {
-    if (custo > 1000) {
+    if (custo >= 1000) {
       return "bg-amber-50 border-amber-200 hover:border-amber-300 hover:bg-amber-100";
     }
     return "bg-white hover:border-gray-300";
@@ -192,7 +192,7 @@ const TaskManager = () => {
     } catch (error) {
       toast({
         title: "Erro ao atualizar tarefa",
-        description: "Não foi possível atualizar a tarefa.",
+        description: error.response.data.detail,
         variant: "destructive",
       });
     }
@@ -296,7 +296,7 @@ const TaskManager = () => {
                 size="icon"
                 disabled={index === 0}
                 onClick={() => handleMoveTask(index, "up")}
-                className="hover:bg-gray-100"
+                className="hover:bg-gray-200 rounded-full"
               >
                 <ChevronUp size={16} />
               </Button>
@@ -305,7 +305,7 @@ const TaskManager = () => {
                 size="icon"
                 disabled={index === tasks.length - 1}
                 onClick={() => handleMoveTask(index, "down")}
-                className="hover:bg-gray-100"
+                className="hover:bg-gray-200 rounded-full"
               >
                 <ChevronDown size={16} />
               </Button>
@@ -313,7 +313,7 @@ const TaskManager = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => handleEdit(task)}
-                className="hover:bg-gray-100"
+                className="hover:bg-gray-200 rounded-full"
               >
                 <Edit size={16} />
               </Button>
@@ -321,7 +321,7 @@ const TaskManager = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => handleDelete(task)}
-                className="hover:bg-gray-100"
+                className="hover:bg-gray-200 rounded-full"
               >
                 <Trash2 size={16} />
               </Button>
